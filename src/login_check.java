@@ -1,3 +1,5 @@
+import page.car;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.ArrayList;
 
 @WebServlet(name = "login_check")
 public class login_check extends HttpServlet {
@@ -20,7 +23,7 @@ public class login_check extends HttpServlet {
         try {
             Class.forName("org.sqlite.JDBC");
             String url = "jdbc:sqlite:D:/bookstore.db";
-            String sql = "SELECT username ,password from user";
+            String sql = "SELECT id,username ,password from user";
 
            // String sql2= "SELECT username from orders";
            // String sql3 = "Insert into orders(username,state) values(?,?)";
@@ -45,8 +48,12 @@ public class login_check extends HttpServlet {
                 if(une.equals(rs.getString("username")) == true && pwd.equals(rs.getString("password")) == true){
                     //将用户名加入session中
                     HttpSession session = request.getSession();
-                    session.setAttribute("username",une );
+                    //car car =new car();
+                   // car.setUsername(une);
+                    ArrayList car = new ArrayList();
 
+                    session.setAttribute("username", une);
+                    session.setAttribute("car",car );
                     stau_login=true;
                   /*  while(rs2.next()){
                         //在orders 列表里面存在该用户
@@ -71,6 +78,7 @@ public class login_check extends HttpServlet {
                     stat4.close();
 */
                     out.println("登录成功，一秒后返回主界面");
+
                     response.setHeader("refresh","1;/index.jsp");
                     break;
                 }
@@ -81,9 +89,10 @@ public class login_check extends HttpServlet {
             //     stat4.close();
                  conn.close();
             //登陆失败，返回登陆页面
-            if(stau_login==false)
-                response.setHeader("refresh","1;/login.html");
-
+            if(stau_login==false) {
+                out.println("登录失败，可能用户名或密码错误，一秒后返回主界面");
+                response.setHeader("refresh", "1;/index.jsp");
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {

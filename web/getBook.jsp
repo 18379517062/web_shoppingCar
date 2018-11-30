@@ -1,5 +1,6 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="page.car" %>
 <%--
   Created by IntelliJ IDEA.
   User: zhaoyang
@@ -23,9 +24,11 @@
     PreparedStatement pstat = conn.prepareStatement(sql);
     pstat.setString(1,categoryID);
     ResultSet rs = pstat.executeQuery();
-   // ArrayList book_name = new ArrayList();
+    ArrayList car = (ArrayList)session.getAttribute("car");
+    int i=1;
     while (rs.next()) {
 %>
+
 <div class="col-sm-9 col-md-3">
     <div class="thumbnail" ><img src="images/book.jpg">
         <div class="caption">
@@ -34,12 +37,8 @@
     </h4>
     <p><%=rs.getString("description")%></p>
 
-    <p><a href="add_car.jsp"  class="btn btn-primary" role="button"
-       <%
-           // book_name.add(rs.getString("name"));
-            session.setAttribute("book_name","book_name");
-        %>
-        >加入购物车</a>
+    <p><a href="add_car.jsp?name=<%=rs.getString("name")%>" class="btn btn-primary" role="button" >加入购物车</a>
+
         <a href="#" class="btn btn-default" role="button">查看详情</a>
     </p>
          </div>

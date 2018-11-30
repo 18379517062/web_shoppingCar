@@ -1,7 +1,10 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %><%--
+<%@ page import="java.sql.ResultSet" %>
+<%@page isELIgnored="false" %>
+
+<%--
   Created by IntelliJ IDEA.
   User: zhaoyang
   Date: 2018/11/5
@@ -32,11 +35,48 @@
           <!--标签的 rel 属性用于指定当前文档与被链接文档的关系,提示作用
           data-* 属性用于存储页面或应用程序的私有自定义数据。
           存储的（自定义）数据能够被页面的 JavaScript 中利用，以创建更好的用户体验-->
-        <a class="login" href="login.html" rel="tooltip" data-
-           placement="bottom" data-toggle="modal" data-target="#myModal"></a>
-        <a class="register" href="register.html" rel="tooltip" data_placement="bottom">
 
-          <a   class="car" href="" rel="tooltip"></a>
+             <a class="login" href="login.html" rel="tooltip" data-
+             placement="bottom" data-toggle="modal" data-target="#myModal"></a>
+
+        <a class="register" href="register.html" rel="tooltip" data_placement="bottom"></a>
+
+               <script>
+                 function out() {
+
+                     <%
+                     if(session.getAttribute("username")==null){
+                     %>
+                     alert("您还未登陆！");
+                     <%
+                     }
+                     else{
+                      %>
+                     var statue =confirm("您即将退出");
+                     if(statue==true)
+                     {
+
+
+                     }
+
+
+                     else{}
+
+                     <% //if(session.getAttribute("statue")=="true")
+                          //response.sendRedirect("logout");
+
+                      %>
+
+
+                <% }%>
+                 }
+               </script>
+
+
+               <a class="logout" href="#" rel="tooltip" data_placement="bottom" onclick="out()"></a>
+
+
+            <a class="car" href="show_car.jsp" rel="tooltip"></a>
 
       </div>
     </div>

@@ -5,10 +5,9 @@
 </head>
 <body>
 <%
-    String pwd =request.getParameter("pwd");
-    String id = session .getAttribute("username");
-    out.println("id:"+id+"<br>");
-    out.print("pwd:"+pwd);
+
+    out.println("id:<br>");
+    out.print("pwd:");
 %>
 </body>
 </html>
